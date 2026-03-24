@@ -9,7 +9,7 @@ export const api = axios.create({
   },
 });
 
-export const setAuthToken = (token: str | null) => {
+export const setAuthToken = (token: string | null) => {
   if (token) {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   } else {

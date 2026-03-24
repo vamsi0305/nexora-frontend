@@ -8,7 +8,7 @@ export const getSocket = () => {
     // We connect to /ws based on backend route mounting or root
     // The backend uses Socket.io ASGIApp which typically runs on root with /socket.io/ path by default
     socket = io(API_URL, {
-      path: "/socket.io", 
+      path: "/ws/socket.io",
       autoConnect: false,
     });
   }

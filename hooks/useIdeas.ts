@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { api } from "../lib/api";
-import { Idea, Comment } from "../types";
+import { Idea, Comment, SupportPledge } from "../types";
 import toast from "react-hot-toast";
 
 export const useIdeas = () => {
@@ -54,7 +54,7 @@ export const useIdeas = () => {
 
   const voteIdea = async (id: string, value: number) => {
     try {
-      await api.post(`/ideas/${id}/vote`, { value });
+      await api.post(`/ideas/${id}/vote`, { value, vote_type: value > 0 ? "upvote" : value < 0 ? "downvote" : null });
       // optimistic update not implemented fully here just refreshing
       return true;
     } catch (err) {
@@ -93,6 +93,15 @@ export const useIdeas = () => {
     }
   };
 
+  const getSupportPledges = async (ideaId: string): Promise<SupportPledge[]> => {
+    try {
+      const res = await api.get(`/ideas/${ideaId}/support`);
+      return res.data;
+    } catch (err) {
+      return [];
+    }
+  };
+
   return {
     ideas,
     ideaDetail,
@@ -103,6 +112,7 @@ export const useIdeas = () => {
     voteIdea,
     getComments,
     postComment,
-    pledgeSupport
+    pledgeSupport,
+    getSupportPledges
   };
 };

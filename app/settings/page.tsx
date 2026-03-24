@@ -30,7 +30,7 @@ export default function SettingsPage() {
 
   const handleLanguageChange = async (lang: string) => {
     try {
-      await api.put("/users/me/language", null, { params: { lang } });
+      await api.put("/users/me/language", { language: lang });
       setFormData({ ...formData, language: lang });
       updateUser({ language: lang });
       toast.success("Language updated");

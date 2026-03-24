@@ -42,10 +42,10 @@ export default function PostIdeaPage() {
       typingTimeoutRef.current = setTimeout(async () => {
         setIsScoring(true);
         try {
-          const res = await api.post("/ai/check-quality", { text: formData.description });
-          setAiScore(res.data.score || 75); // Mock fallback if api fails structurally but succeeds HTTP
+          const res = await api.post("/ai/check-quality", { content: formData.description });
+          setAiScore(res.data.score || 75);
         } catch {
-          setAiScore(70); // Mock on error
+          setAiScore(70);
         } finally {
           setIsScoring(false);
         }
@@ -63,7 +63,7 @@ export default function PostIdeaPage() {
       title: formData.title,
       description: formData.description,
       domain: formData.domain,
-      status: formData.stage,
+      status: formData.stage.toLowerCase().replace(/\s+/g, "_"),
       tags: formData.tags,
       required_skills: [],
       goal_amount: 0,

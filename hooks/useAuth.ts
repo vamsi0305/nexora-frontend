@@ -32,14 +32,19 @@ export const useAuth = () => {
     try {
       const res = await api.post("/auth/register", { email, password, ...userData });
       const { access_token, user } = res.data;
-      setAuthToken(access_token);
-      setAuth(user, access_token);
-      toast.success("Account created successfully!");
-      return true;
+      if (access_token && access_token !== "registration-successful-login-required") {
+        setAuthToken(access_token);
+        setAuth(user, access_token);
+        toast.success("Account created successfully!");
+        return "authenticated";
+      } else {
+        toast.success("Account created. Please sign in to continue.");
+        return "login_required";
+      }
     } catch (error: any) {
       console.error(error);
       toast.error(error.response?.data?.detail || "Registration failed");
-      return false;
+      return "error";
     } finally {
       setLoading(false);
     }

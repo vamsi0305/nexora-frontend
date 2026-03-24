@@ -9,8 +9,14 @@ export default function FeedPage() {
   const [activeTab, setActiveTab] = useState("Trending");
 
   useEffect(() => {
-    // In a real app we pass sorting filters based on tab
-    fetchIdeas();
+    const sortMap: Record<string, string> = {
+      Trending: "trending",
+      New: "recent",
+      "Top Voted": "popular",
+      Local: "recent",
+    };
+
+    fetchIdeas({ sort: sortMap[activeTab] ?? "recent" });
   }, [activeTab, fetchIdeas]);
 
   return (

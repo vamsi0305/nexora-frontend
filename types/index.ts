@@ -54,3 +54,26 @@ export interface Notification {
   is_read: boolean;
   created_at: string;
 }
+
+export interface SupportPledge {
+  id: string;
+  idea_id: string;
+  user_id: string;
+  support_type: string;
+  amount?: number;
+  message?: string;
+  status: string;
+  created_at: string;
+  users?: Partial<User>;
+  ideas?: Partial<Idea>;
+}
+
+export interface Message {
+  id: string;
+  sender_id: string;
+  receiver_id: string;
+  idea_id: string;
+  content: string;
+  is_read: boolean;
+  created_at: string;
+}

@@ -46,7 +46,7 @@ export default function RegisterPage() {
       toast.error("Passwords do not match");
       return;
     }
-    const success = await register(email, password, {
+    const result = await register(email, password, {
       full_name: formData.name,
       phone_number: formData.phone_number || "0000000000",
       college: formData.college,
@@ -56,8 +56,10 @@ export default function RegisterPage() {
       domain_interests: formData.domain_interests
     });
     
-    if (success) {
+    if (result === "authenticated") {
       router.push("/feed");
+    } else if (result === "login_required") {
+      router.push("/login");
     }
   };
 

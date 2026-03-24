@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Syne, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { AnimatedBackground } from "@/components/shared/AnimatedBackground";
+import { AuthBootstrap } from "@/components/shared/AuthBootstrap";
 import { Navbar } from "@/components/layout/Navbar";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Footer } from "@/components/layout/Footer";
@@ -33,6 +34,7 @@ export default function RootLayout({
     <html lang="en" className={`${syne.variable} ${dmSans.variable} dark`}>
       <body className="bg-[#05050F] text-[#F8FAFC] antialiased min-h-screen flex flex-col relative">
         <AnimatedBackground />
+        <AuthBootstrap />
         <Toaster position="top-right" toastOptions={{
           style: {
             background: "#100B1E",
